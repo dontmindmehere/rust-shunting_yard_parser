@@ -98,7 +98,7 @@ impl fmt::Display for MathToken {
 
 struct Tokens(Vec<MathToken>);
 impl Tokens {
-    fn parse(input: &str) -> Result<Tokens, MathError> {
+    fn parse(input: &str) -> Result<Self, MathError> {
         let mut chars = input.chars().peekable();
         let mut tokens = Vec::new();
 
@@ -125,7 +125,7 @@ impl Tokens {
         }
     }
 
-    fn shunting(self) -> Result<Tokens, MathError> {
+    fn shunting(self) -> Result<Self, MathError> {
         let mut op_stack: Vec<Op> = Vec::new();
         let mut out_queue: Vec<MathToken> = Vec::new();
 
@@ -194,6 +194,7 @@ impl Tokens {
 }
 impl fmt::Display for Tokens {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        // :)
         let mut tokens = self.0.iter();
         if let Some(token) = tokens.next() {
             match token {
